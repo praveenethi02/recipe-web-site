@@ -1,0 +1,29 @@
+The aim 01: Define strict TypeScript interfaces for all DummyJSON API responses
+Actual prompt: I am building a Vue 3 + TypeScript SPA that fetches from https://dummyjson.com/recipes. Generate strict TypeScript interfaces (no 'any') for the following API responses: GET /recipes (paginated list), GET /recipes/:id (single recipe), POST /auth/login (JWT response), and a CartItem shape for a meal-planner feature. Include all fields from the DummyJSON docs.
+
+The aim 02: Build the API composable with full error handling and loading state
+Actual prompt: Create a Vue 3 Composition API composable called useRecipeApi.ts that wraps fetch() calls to DummyJSON. It should expose: fetchRecipes(skip, limit), searchRecipes(query, skip, limit), fetchRecipeById(id), fetchRecipesByMealType(type). Each function should set a shared `loading` ref to true while in-flight and write any errors to an `error` ref. All return types must use the interfaces from types/index.ts. No 'any'.
+
+The aim 03: Tailwind CSS custom color palette and component layer classes
+Actual prompt: I need a tailwind.config.js for a food recipe app with: darkMode: 'class', a custom 'saffron' color scale (warm orange-amber, 50-950 shades), a 'forest' green scale, and a 'cream' scale for warm off-white backgrounds. Also write a style.css @layer components section with reusable classes: .btn-primary (saffron CTA with hover shadow), .btn-secondary (outlined), .card (hover lift + shadow deepening), .input-field (border + focus ring), .tag-pill, and difficulty badge variants.
+
+The aim 04: FilterBar component with debounced search and filter dropdowns
+Actual prompt: Write a Vue 3 FilterBar.vue component using Composition API and TypeScript. It should use v-model with a FilterState interface ({ search, cuisine, difficulty, mealType, maxCalories }). The search input should debounce for 400ms before emitting. Difficulty should use three toggle buttons (Easy/Medium/Hard) that deselect on re-click. Cuisine and MealType should be <select> elements. Emit 'update:modelValue' and 'search' events. Style with Tailwind only.
+
+The aim 05: RecipeCard component with bookmark toggle, hover interactions, and routing
+Actual prompt: Create a Vue 3 RecipeCard.vue that accepts a Recipe prop (TypeScript). It should: display the recipe image with aspect-ratio 4/3 and an overlay on hover showing the star rating; show a difficulty badge top-left; have a bookmark toggle button top-right that calls a Pinia store; show cuisine tag, meal type tag, recipe name (line-clamp-2), hashtags, and a footer row with total time, calories per serving, and servings count. Add a staggered animationDelay prop for entrance animation. Navigate to /recipe/:id on card click.
+
+The aim 06: Pinia auth store with JWT localStorage persistence
+Actual prompt: Write a Pinia store (useAuthStore) in TypeScript for authentication simulation using DummyJSON /auth/login. It should: POST credentials with expiresInMins: 60; store the returned JWT and user object in localStorage; expose isAuthenticated (computed), displayName (computed), login(credentials) async function returning boolean, and logout() that clears localStorage. Use the AuthUser interface. No any.
+
+The aim 07: Dark mode composable with localStorage persistence
+Actual prompt: Create a Vue 3 composable useDarkMode.ts. It should use a module-level ref so the dark state is shared across all components. On initTheme() it should read from localStorage ('theme' key), falling back to prefers-color-scheme. A watchEffect should add/remove the 'dark' class on document.documentElement and write to localStorage whenever isDark changes. Export isDark, toggleDark, and initTheme.
+
+The aim 08: RecipeDetailView with ingredient/instruction tabs, serving scaler, and sidebar actions
+Actual prompt: Write a Vue 3 view RecipeDetailView.vue. It receives an `id: number` prop from Vue Router. It should: fetch the recipe on mount using useRecipeApi; show a hero image with a back button overlay; display a stat row (prep time, cook time, total time, calories); have an ingredient/instruction tab switcher; include a serving multiplier (+/- by 0.5) that scales the displayed serving count; have a sticky sidebar with 'Add to Meal Plan' (Pinia bookmarkStore.addToCart) and 'Save Recipe' (bookmarkStore.toggleBookmark) buttons. Show skeleton shimmer while loading. Use TypeScript throughout.
+
+The aim 09: Audit code for type safety and common Vue 3 pitfalls
+Actual prompt: Review this Vue 3 TypeScript codebase for: (1) any implicit 'any' types, (2) missing defineEmits generic types, (3) reactive state mutations that should use .value, (4) missing key attributes on v-for, (5) potential undefined access without null checks. List each issue with file name and line, and suggest a fix for each.
+
+The aim 10: Generate the shimmer skeleton loading component and page transition CSS
+Actual prompt: Create a SkeletonCard.vue component that mirrors the layout of RecipeCard.vue but uses shimmer placeholder divs (no real content). The shimmer should be a CSS gradient animation (backgroundPosition sweep). Also write the CSS for Vue's <Transition name="page"> that fades and translates the outgoing and incoming route components. Use Tailwind for layout, raw CSS for the animation keyframes.
